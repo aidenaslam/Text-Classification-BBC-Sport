@@ -1,1 +1,1 @@
-# Text-Classification-BBC-Sport
+# Sports News Classification
