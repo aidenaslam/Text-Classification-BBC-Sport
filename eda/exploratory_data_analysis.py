@@ -1,12 +1,7 @@
 import matplotlib.pyplot as plt
 import matplotlib as mpl
 
-#from parameters import project_parameters.font
-
-# Define global font for EDA
-font = {'family' : 'calibri',
-        'weight' : 'normal',
-        'size'   : 18}
+from final_code.parameters.project_parameters import font
 
 def plot_num_headlines(dataset):
     """ plots bar graph of number of headlines per class """

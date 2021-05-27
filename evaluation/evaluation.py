@@ -5,19 +5,15 @@ import matplotlib as mpl
 from sklearn.metrics import classification_report
 from sklearn.metrics import plot_confusion_matrix
 
+from final_code.parameters.project_parameters import font
 #from modelling.build_models import logistic_regression_model, svm_model, random_forest_model, naive_bayes_model
 
-# Define global font for EDA
-font = {'family' : 'calibri',
-        'weight' : 'normal',
-        'size'   : 18}
-
 # List models to run CV
-models = []
-models.append(('Logistic Reg (baseline)', logistic_regression_model ))
-models.append(('SVM', SVM_model ))
-models.append(('Random Forest', RF_model ))
-models.append(('Naive Bayes', NB ))
+#models = []
+#models.append(('Logistic Reg (baseline)', logistic_regression_model ))
+#models.append(('SVM', SVM_model ))
+#models.append(('Random Forest', RF_model ))
+#models.append(('Naive Bayes', NB ))
 
 def cross_validation(models, x, y, number_of_splits):
     """ Startified cross validation """

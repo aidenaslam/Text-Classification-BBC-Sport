@@ -1,3 +1,7 @@
+from final_code.parameters.project_parameters import url_list_bbc, url_list_sky_sports
+from final_code.data_prep.scrape_data import bbc_sport_news, sky_sports_news
+
+
 
 ## add run time
 ## implement logs
@@ -5,11 +9,8 @@
 # create environment
 
 # scrape data
-bbc_dataset = bbc_sport_news(url_list)
-skysports_dataset = sky_sports_news(url_list)
-
-# merge datasets
-dataset_combined = pd.concat([bbc_dataset,skysports_dataset])
+bbc_dataset = bbc_sport_news(url_list_bbc)
+skysports_dataset = sky_sports_news(url_list_sky_sports)
 
 # process_datasets
 
