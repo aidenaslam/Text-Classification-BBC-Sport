@@ -11,8 +11,8 @@ def combine_dataset(dataset_1, dataset_2):
 def save_to_csv(dataset):
     """ Saves dataset as csv with today's date """
 
-    date = date.today().strftime("%d_%m_%Y")
-    pd.read_csv(f'Sports_News_{date}.csv')
+    today_date = date.today().strftime("%d_%m_%Y")
+    dataset.to_csv(f'Sports_News_{today_date}.csv', index= False)
 
 def check_classes(dataset):
     """ Checks classes of news """

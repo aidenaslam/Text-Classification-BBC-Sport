@@ -2,7 +2,7 @@ import requests
 from bs4 import BeautifulSoup
 import pandas as pd
 
-def bbc_sport_news(url):
+def bbc_sport_news(url_list):
     """ Scrape news headlines from BBC Sport """    
     headlines_list = []
     source_list = [] 
@@ -25,8 +25,8 @@ def bbc_sport_news(url):
         
     return dataset
 
-    def sky_sports_news(url_list):
-        """ Scrape news headlines from Sky Sports News """    
+def sky_sports_news(url_list):
+    """ Scrape news headlines from Sky Sports News """    
     headlines_list = []
     source_list = []
 
