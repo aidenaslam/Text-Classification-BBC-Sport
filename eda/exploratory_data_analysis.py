@@ -1,7 +1,7 @@
 import matplotlib.pyplot as plt
 import matplotlib as mpl
 
-from final_code.parameters.project_parameters import font
+from parameters.project_parameters import font
 
 def plot_num_headlines(dataset):
     """ plots bar graph of number of headlines per class """

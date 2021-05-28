@@ -5,7 +5,7 @@ from sklearn.svm import LinearSVC
 
 def logistic_regression_model(X_train, y_train):
     """ Build logistic regression model """
-    logistic_regression_model = LogisticRegression(random_state=0, multi_class = 'multinomial',
+    logistic_regression_model = LogisticRegression(multi_class = 'multinomial',
                           max_iter = 100, class_weight = 'balanced').fit(X_train, y_train)
     return logistic_regression_model
 
