@@ -1,0 +1,13 @@
+{
+    "python.pythonPath": "C:\\Users\\Aiden\\anaconda3\\envs\\sports_classification\\python.exe",
+    "python.testing.unittestArgs": [
+        "-v",
+        "-s",
+        "./unit_tests",
+        "-p",
+        "test_*.py"
+    ],
+    "python.testing.pytestEnabled": false,
+    "python.testing.nosetestsEnabled": false,
+    "python.testing.unittestEnabled": true
+}

@@ -55,6 +55,7 @@ def cross_validation(models, x, y, number_of_splits):
         plt.savefig(os.path.join(save_ouptuts, file_name))
         #plt.savefig(f'{name}_CV_Models.png')
         plt.close()
+    return cv_results
 
 def confusion_matrix(best_model, x, y, model_name):
     """ Plot confusion matrix """
