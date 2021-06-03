@@ -30,7 +30,6 @@ def cross_validation(models, x, y, number_of_splits):
 
         file_name = models[0]+"CV_Models.png"
         plt.savefig(os.path.join(save_ouptuts, file_name))
-        #plt.savefig(f'{models[0]}_CV_Models.png')
         plt.close()
     else:
         # Stratified cross validation for multiple models
@@ -53,7 +52,6 @@ def cross_validation(models, x, y, number_of_splits):
         mpl.rc('font', **font)
         file_name = name+"CV_Models.png"
         plt.savefig(os.path.join(save_ouptuts, file_name))
-        #plt.savefig(f'{name}_CV_Models.png')
         plt.close()
     return cv_results
 
@@ -65,5 +63,4 @@ def confusion_matrix(best_model, x, y, model_name):
     disp.ax_.set_title('Confusion Matrix')
     file_name = model_name+"_Confusion_Matrix.png"
     fig.savefig(os.path.join(save_ouptuts, file_name))
-    #fig.savefig(f'{model_name}_Confusion_Matrix.png')
     plt.close()

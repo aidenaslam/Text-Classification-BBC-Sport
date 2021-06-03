@@ -21,5 +21,9 @@ url_list_sky_sports = [
 
 # Save outputs 
 project_path = r'C:\Users\Aiden\Documents\Data_Science_Stuff\sf_Data_Science_Stuff\Projects\01_SportsNewsClassifier\final_code'
+input_folder = "input_data"
 output_folder = "outputs"
+models_folder = "saved_models"
 save_ouptuts = os.path.join(project_path, output_folder)
+save_input = os.path.join(project_path, input_folder)
+save_models = os.path.join(project_path, models_folder)

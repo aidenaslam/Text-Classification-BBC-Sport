@@ -1,24 +1,19 @@
 import pandas as pd
+import os
+import pickle
 from datetime import date
 from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.feature_extraction.text import TfidfTransformer
 from sklearn.model_selection import train_test_split
 
+from parameters.project_parameters import save_input
 
-def data_processing(dataset_1, dataset_2, flag):
+
+
+def data_processing(dataset_combined):
     """ Performs data processing of both datasets 
         If flag is set True, CSV of dataset is saved
     """
-    # combine datasets
-    dataset_combined = combine_dataset(dataset_1, dataset_2)
-
-    # save_to_csv
-    if flag == True:
-        save_to_csv(dataset_combined)
-
-    # rename class name for F1
-    dataset_combined = check_classes(dataset_combined)
-
     # perform tfidf transformation
     X = dataset_combined.iloc[:,0] # extract column with headlines
     y = dataset_combined.iloc[:,-1] # extract column with labels
@@ -26,10 +21,18 @@ def data_processing(dataset_1, dataset_2, flag):
 
     return X_vec, y
 
+def rename_class(dataset_combined):
+    """ Renames class """
+    dataset_combined = check_classes(dataset_combined)
+    return dataset_combined
 
-def combine_dataset(dataset_1, dataset_2):
+def combine_dataset(dataset_1, dataset_2, flag):
     """ Combines two datasets """
     dataset_combined = pd.concat([dataset_1, dataset_2])
+    
+    # save_to_csv
+    if flag == True:
+        save_to_csv(dataset_combined)
 
     return dataset_combined
 
@@ -37,13 +40,15 @@ def save_to_csv(dataset):
     """ Saves dataset as csv with today's date """
 
     today_date = date.today().strftime("%d_%m_%Y")
-    dataset.to_csv(f'Sports_News_{today_date}.csv', index= False)
+    file_name = "Sports_News_"+today_date+".csv"
+    #dataset.to_csv(f'Sports_News_{today_date}.csv', index= False)
+    dataset.to_csv(os.path.join(save_input, file_name), index= False)
 
 def check_classes(dataset):
     """ Checks classes of news """
 
     # Change formula1 to f1 
-    dataset['Sport'] = dataset['Sport'].replace(['formula1'],'f1')
+    dataset['Sport'] = dataset['Sport'].replace(['formula1'],['f1'])
 
     return dataset
 
@@ -52,6 +57,9 @@ def count_vectorise(x):
     vectorizer = CountVectorizer(stop_words='english')
     X_vec = vectorizer.fit_transform(x)
     X_vec.todense() # convert sparse matrix into dense matrix
+    
+    #SAVE WORD VECTOR
+    pickle.dump(vectorizer.vocabulary_, open("count_vector.pkl","wb"))
     
     return X_vec
 
@@ -62,6 +70,9 @@ def tfidf_transform(x):
     X_tfidf = tfidf.fit_transform(x_vec)
     X_tfidf = X_tfidf.todense()
 
+    #SAVE TF-IDF
+    pickle.dump(tfidf, open("tfidf.pkl","wb"))
+    
     return X_tfidf
 
 def split_dataset(x_tfidf, y, test_size_split):
@@ -75,3 +86,17 @@ def split_dataset(x_tfidf, y, test_size_split):
 
     return X_train, X_test, y_train, y_test
 
+def make_prediction(model, headline):
+    
+    headline = [headline]
+
+    #LOAD MODEL
+    loaded_vec = CountVectorizer(vocabulary=pickle.load(open("count_vector.pkl", "rb")))
+    loaded_tfidf = pickle.load(open("tfidf.pkl","rb"))
+    #loaded_model = pickle.load(open("nb_model.pkl","rb"))
+
+    X_new_counts = loaded_vec.transform(headline)
+    X_new_tfidf = loaded_tfidf.transform(X_new_counts)
+    predicted = model.predict(X_new_tfidf)
+
+    return ''.join(predicted)

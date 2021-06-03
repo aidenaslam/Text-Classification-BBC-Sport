@@ -16,5 +16,6 @@ dependencies:
     - scikit-learn==0.23.2
     - matplotlib==3.3.1
     - bs4==4.9.3
+    - flask==2.0.1
 name: sports_classification
 prefix: envs/sports_classification
